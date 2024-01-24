@@ -11,7 +11,7 @@ import (
 func CreateBook(c *gin.Context) {
 	var book model.Book
 
-	res := database.DB.Create(book)
+	res := database.DB.Create(&book)
 	if res.RowsAffected == 0 {
 		fmt.Println("Error while creating a book data")
 	}
@@ -20,7 +20,7 @@ func CreateBook(c *gin.Context) {
 func ReadBooks(c *gin.Context) {
 	var book []model.Book
 
-	res := database.DB.Find(book)
+	res := database.DB.Model(&[]model.Book{}).Find(&book)
 	if res.Error != nil {
 		fmt.Println("Error while fetching all book details")
 	}
@@ -29,7 +29,7 @@ func ReadBooks(c *gin.Context) {
 func UpdateBook(c *gin.Context) {
 	var book model.Book
 	id := c.Param("id")
-	res := database.DB.Model(&book).Where("id = ?", id).Updates(book)
+	res := database.DB.Model(&book).Where("id = ?", id).Updates(&book)
 	if res.RowsAffected == 0 {
 		fmt.Println("Error while updating Book record")
 	}
