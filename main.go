@@ -14,7 +14,7 @@ func main() {
 
 	r := gin.Default()
 	r.GET("/books", controller.ReadBooks)
-	r.POST("/books", controller.CreateBook)
+	r.POST("/book", controller.CreateBook)
 	r.PUT("/books/:id", controller.UpdateBook)
 	r.Run(":5000")
 }

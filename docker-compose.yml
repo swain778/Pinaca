@@ -1,8 +1,15 @@
-db:
-    environment:
-        - POSTGRES_DB=book
-        - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=pass1234
+version: '3.9'
+services:
+  book-database:
+    build:
+      context: .
     ports:
-        - "5432:5432"
-    
+      - 54323:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: book
+    volumes:
+      - book-db-vol:/var/lib/postgresql/data
+volumes:
+  book-db-vol:
